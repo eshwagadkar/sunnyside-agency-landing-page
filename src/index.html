@@ -13,43 +13,52 @@
   </style>
   <script type="text/javascript" src="./bundled.js"></script>
 </head>
-<body>
-  <!--Start: Main Header Container -->
-  <header class="header">
+<!------------------- Start: Main Page Grid Layout ---------------------------->
+<body class="main-grid-layout">
+  <!----------------- Start : Hero Banner ------------------------------------->
+  <header class="hero-banner">
 
-    <!-- Start: Header Logo -->
-    <h1 class="header__logo">
-      <a href="/" rel="home">
-       <img src="./images/header/logo.svg" alt="header-logo" />
-      </a>
-    </h1>
-    <!-- End: Header Logo -->
+        <!-- Start : Hero Banner Header -->
+        <header class="hero-banner__header">
 
-    <!-- Start: Main Navigation -->
-    <nav class="header__navigation">
-      <!-- Start: Navigation Links -->
-      <ul class="header__navigation-list">
-        <li class="header__navigation-list--1"><a class="header__navigation-list--link-1">About</a></li>
-        <li class="header__navigation-list--2"><a class="header__navigation-list--link-2">Services</a></li>
-        <li class="header__navigation-list--3"><a class="header__navigation-list--link-3">Projects</a></li>
-        <li class="header__navigation-list--4"><a class="header__navigation-list--link-4">Contact</a></li>
-      </ul> 
-      <!-- End: Navigation Links -->
-    </nav>
-    <!--End: Main Navigation-->
+          <!-- Start : Logo Container -->
+          <div class="hero-banner__logo-container">
+            <a href="/" rel="home">
+              <h1 class="hero-banner__logo">
+                  sunnyside  <!-- <img src="./images/header/logo.svg" alt="header-logo" /> -->
+              </h1>
+            </a>
+          </div>
+          <!-- End : Logo Container -->
 
-    <!-- Start: Header Banner-->
-    <section class="hero-banner">
-      <img class="hero-banner__image" src="./images/header/png/image-header-large.png" alt="" srcset="">
-      <h2 class="hero-banner__text" >WE ARE CREATIVES</h2>
-    </section>
-    <!-- End: Header Banner -->
+          <!-- Start: Main Navigation -->
+          <nav class="hero-banner__navigation">
+            <!-- Start: Navigation Links -->
+            <ul class="hero-banner__navigation-list">
+              <li class="hero-banner__navigation-list--1"><a class="hero-banner__navigation-list--link-1">About</a></li>
+              <li class="hero-banner__navigation-list--2"><a class="hero-banner__navigation-list--link-2">Services</a></li>
+              <li class="hero-banner__navigation-list--3"><a class="hero-banner__navigation-list--link-3">Projects</a></li>
+              <li class="hero-banner__navigation-list--4"><a class="hero-banner__navigation-list--link-4">Contact</a></li>
+            </ul> 
+            <!-- End: Navigation Links -->
+          </nav>
+          <!--End: Main Navigation-->
+
+        </header>
+        <!-- End : Hero Banner Header -->
+
+        <!-- Start: Hero Banner Content -->
+        <section class="hero-banner__main">
+          <img class="hero-banner__image" src="./images/header/png/image-header-large.png" alt="" srcset="">
+          <h2 class="hero-banner__text" >WE ARE CREATIVES</h2>
+        </section>
+        <!-- End: Hero Banner Content-->
 
   </header>
-  <!-- End: Main Header Container -->
+  <!----------------- End : Hero Banner --------------------------------------->
 
-  <!-- Start: Main Content Container -->
-  <main class="main-grid">
+  <!----------------- Start : Main Content ------------------------------------>
+  <main class="main">
     
     <!-- Start: About Section -->
     <section class="main-grid__item-1 about">
@@ -264,9 +273,9 @@
     </section>
     <!-- End: Project(s) Image Gallery Section --> 
   </main>
-  <!-- End: Main Content Container -->
+  <!----------------- End : Main Content -------------------------------------->
 
-  <!-- Start: Footer -->
+  <!----------------- Start : Footer ------------------------------------------>
   <footer class="footer">
     
     <!-- Footer Header -->
@@ -287,12 +296,16 @@
       <li class="footer__tw"><img src="./images/social-media/icon-twitter.svg" alt="twitter"></li>
       <li class="footer__pi"><img src="./images/social-media/icon-pinterest.svg" alt="pinterest"></li>
     </ul>
-  </footer>
-  <!-- End: Footer Social Media Link Container -->
 
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+    <!-- Start: Attribution -->
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Eshwa Gadkar</a>.
+    </div>
+    <!-- End: Attribution -->
+
+  </footer>
+  <!----------------- End : Footer -------------------------------------------->
 </body>
+<!------------------- End: Main Page Grid Layout ------------------------------>
 </html>
