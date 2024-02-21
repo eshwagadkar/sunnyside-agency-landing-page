@@ -1,0 +1,4 @@
+.main-grid-layout{
+    display: grid;
+    grid-template-rows: repeat(5, minmax(min-content, max-content));
+}
