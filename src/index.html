@@ -15,16 +15,15 @@
 </head>
 <!------------------- Start: Main Page Grid Layout ---------------------------->
 <body class="main-grid-layout">
-  <!----------------- Start : Hero Banner ------------------------------------->
-  <header class="hero-banner">
-
-        <!-- Start : Hero Banner Header -->
-        <header class="hero-banner__header">
+  <!----------------- Start : Header Main ------------------------------------->
+  <header class="main-header">
+        <!-- Start : Header of the Main Header -->
+        <header class="main-header__header">
 
           <!-- Start : Logo Container -->
-          <div class="hero-banner__logo-container">
-            <a href="/" rel="home">
-              <h1 class="hero-banner__logo">
+          <div class="main-header__logo-container">
+            <a class="main-header__logo-link" href="/" rel="home">
+              <h1 class="main-header__logo-text">
                   sunnyside  <!-- <img src="./images/header/logo.svg" alt="header-logo" /> -->
               </h1>
             </a>
@@ -32,33 +31,52 @@
           <!-- End : Logo Container -->
 
           <!-- Start: Main Navigation -->
-          <nav class="hero-banner__navigation">
+          <nav class="main-header__navigation">
             <!-- Start: Navigation Links -->
-            <ul class="hero-banner__navigation-list">
-              <li class="hero-banner__navigation-list--1"><a class="hero-banner__navigation-list--link-1">About</a></li>
-              <li class="hero-banner__navigation-list--2"><a class="hero-banner__navigation-list--link-2">Services</a></li>
-              <li class="hero-banner__navigation-list--3"><a class="hero-banner__navigation-list--link-3">Projects</a></li>
-              <li class="hero-banner__navigation-list--4"><a class="hero-banner__navigation-list--link-4">Contact</a></li>
+            <ul class="main-header__navigation-list">
+              <li class="main-header__navigation-item">
+                <a class="main-header__navigation-link
+                   main-header__navigation-link--about">
+                   About
+                </a>
+              </li>
+              <li class="main-header__navigation-item">
+                <a class="main-header__navigation-link
+                   main-header__navigation-link--services">
+                   Services
+                </a>
+              </li>
+              <li class="main-header__navigation-item">
+                <a class="main-header__navigation-link
+                   main-header__navigation-link--projects">
+                   Projects
+                </a>
+              </li>
+              <li class="main-header__navigation-item">
+                <a class="main-header__navigation-link
+                   main-header__navigation-link--contact">
+                   Contact
+                </a>
+              </li>
             </ul> 
             <!-- End: Navigation Links -->
           </nav>
           <!--End: Main Navigation-->
 
         </header>
-        <!-- End : Hero Banner Header -->
+        <!-- Start : Header of the Main Header -->
 
-        <!-- Start: Hero Banner Content -->
-        <section class="hero-banner__main">
-          <img class="hero-banner__image" src="./images/header/png/image-header-large.png" alt="" srcset="">
-          <h2 class="hero-banner__text" >WE ARE CREATIVES</h2>
-        </section>
+        <!-- Start: Hero Banner -->
+        <div class="main-header__banner-container">
+          <img class="main-header__banner-image" src="./images/header/png/image-header-small.png" alt="" srcset="">
+          <h2 class="main-header__text-content" >WE ARE CREATIVES</h2>
+        </div>
         <!-- End: Hero Banner Content-->
-
   </header>
-  <!----------------- End : Hero Banner --------------------------------------->
+  <!----------------- End : Header Main --------------------------------------->
 
   <!----------------- Start : Main Content ------------------------------------>
-  <main class="main">
+  <main class="main-content">
     
     <!-- Start: About Section -->
     <section class="main-grid__item-1 about">
@@ -142,9 +160,11 @@
        <!-- End: Service list container -->
     </section>
     <!-- End: Services Section Container -->
+  </main>
+  <!----------------- End : Main Content -------------------------------------->
 
-    <!-- Start: Testimonials Section Container-->
-    <section class="main-grid__item-3 testimonials">
+  <!-- Start: Testimonials Section Container-->
+  <section class="testimonials">
       <!-- Start: Testimonial Header -->
       <header class="testimonials__header-container">
         <h3>Client testimonials</h3>
@@ -247,11 +267,11 @@
         <!------------------------------------------------------------------------------------------>
       </ul>
       <!-- End: Testimoials Columns  -->
-    </section>
-    <!-- End: Testimonials Section  -->
+  </section>
+  <!-- End: Testimonials Section  -->
 
-    <!-- Start: Project(s) Image Gallery Section  -->
-    <section class="main-grid__item-4 image-gallery">
+  <!-- Start: Project(s) Image Gallery Section  -->
+  <section class="image-gallery">
       <ul class="image-gallery__list-container">
         <!-- Project 1 -->
         <li class="image-gallery__list-item">
@@ -270,10 +290,8 @@
           <img src="./images/projects/mobile/jpg/image-gallery-sugar-cubes.jpg" alt="sugar-cubes" />
         </li>
       </ul>
-    </section>
-    <!-- End: Project(s) Image Gallery Section --> 
-  </main>
-  <!----------------- End : Main Content -------------------------------------->
+  </section>
+  <!-- End: Project(s) Image Gallery Section --> 
 
   <!----------------- Start : Footer ------------------------------------------>
   <footer class="footer">
