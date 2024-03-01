@@ -8,19 +8,23 @@ const isProduction = process.env.NODE_ENV == 'production';
 const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
+// Access the fields to configure webpack
+const pkgVars = require('./package.json');
+
+// Destructure variables from pkgVars.config
+const {entry, sourceDir, buildDir, port} = pkgVars.config;
+
 const config = {
-    entry: './src/scripts/index.js',
+    entry: `./${sourceDir}/scripts/index.js`,
     output: {
         filename: browserCacheHandler,
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, buildDir),
     },
     devServer: {
-        static:{
-            directory: path.join(__dirname, './dist'),
-        } ,
+        static: './dist' ,
         watchFiles: [`./${sourceDir}/index.hbs`],
         hot: true,
-        port: 3001,
+        port,
         open: true,
         compress: true,
         historyApiFallback: true,
@@ -62,7 +66,7 @@ const config = {
         // }),
         new HtmlWebpackPlugin({
             title: 'Sunny-Side-Landing-Page',
-            template: 'src/index.hbs',
+            template: `./${sourceDir}/index.hbs`,
             description: 'Some Description'
         })
 

@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "prod": "webpack --mode=production --node-env=production",
-    "dev": "webpack serve --mode=development --node-env=development"
+    "dev": "webpack serve --mode=development --node-env=development --hot"
   },
   "repository": {
     "type": "git",
