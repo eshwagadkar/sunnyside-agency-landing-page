@@ -4,7 +4,7 @@ module.exports = {
     mode: 'development',
     entry: './src/scripts/index.js',
     output: {
-        filename: 'bundled.js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, 'src'),
     },
 
@@ -21,8 +21,13 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.(js|jsx)$/i,
+                exclude: /node_modules/,
+                use: { loader: 'babel-loader' }
+            },
            { 
-                test: /\.scss$/i, 
+                test: /\.s[ac]ss$/i, 
                 use: [ 'style-loader', 'css-loader', 'sass-loader'] 
            },
            {
