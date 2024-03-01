@@ -1,12 +1,14 @@
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     mode: 'development',
     entry: './src/scripts/index.js',
     output: {
-        filename: 'bundle.js',
+        filename: 'bundle.[contenthash].js',
         path: path.resolve(__dirname, './dist'),
     },
 
@@ -43,12 +45,30 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.hbs$/,
+                use: [
+                    'handlebars-loader'
+                ]
+            }
          ],
     },
     plugins: [
         new TerserPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'styles.css',
+            filename: 'styles.[contenthash].css',
+        }),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: [
+                "**/*",
+                // path.join(process.cwd(), 'build/**/*')
+            ]
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Sunny-Side-Landing-Page',
+            template: 'src/index.hbs',
+            description: 'Some Description'
         })
+
     ]
 }
