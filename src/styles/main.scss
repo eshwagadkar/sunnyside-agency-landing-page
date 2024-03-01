@@ -2,13 +2,13 @@
 @import "abstracts/mixins";
 @import "abstracts/variables";
 
+@import "normalize.css";
 @import "base/base";
 @import "base/typography";
 @import "base/utility";
 @import "base/animation";
 
 @import "components/button";
-
 
 @import "layout/grid";
 @import "layout/header";
