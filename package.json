@@ -4,8 +4,6 @@
   "description": "A solution for a task from frontend-mentor website.",
   "main": "index.html",
   "scripts": {
-    "start": "webpack serve",
-    "prod": "webpack --config webpack.production.config.js",
     "dev": "webpack-dev-server"
   },
   "repository": {
@@ -27,5 +25,8 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
