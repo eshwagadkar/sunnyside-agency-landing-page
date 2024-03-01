@@ -1,21 +1,24 @@
 const path = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = {
-    mode: 'development',
+const isProduction = process.env.NODE_ENV == 'production';
+
+const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
+const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+
+const config = {
     entry: './src/scripts/index.js',
     output: {
-        filename: 'bundle.[contenthash].js',
+        filename: browserCacheHandler,
         path: path.resolve(__dirname, './dist'),
     },
-
     devServer: {
         static:{
-            directory: path.join(__dirname, 'src'),
+            directory: path.join(__dirname, './dist'),
         } ,
+        watchFiles: [`./${sourceDir}/index.hbs`],
         hot: true,
         port: 3001,
         open: true,
@@ -32,16 +35,13 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
+                use: [ stylesHandler, 'css-loader' ]
             },
-           { 
+            { 
                 test: /\.s[ac]ss$/i, 
-                use: [ MiniCssExtractPlugin.loader , 'css-loader', 'sass-loader'] 
-           },
-           {
+                use: [ stylesHandler , 'css-loader', 'sass-loader'] 
+            },
+            {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
@@ -54,16 +54,12 @@ module.exports = {
          ],
     },
     plugins: [
-        new TerserPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'styles.[contenthash].css',
-        }),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [
-                "**/*",
-                // path.join(process.cwd(), 'build/**/*')
-            ]
-        }),
+        // new CleanWebpackPlugin({
+        //     cleanOnceBeforeBuildPatterns: [
+        //         "**/*", // Default Option
+        //         // path.join(process.cwd(), 'build/**/*')
+        //     ]
+        // }),
         new HtmlWebpackPlugin({
             title: 'Sunny-Side-Landing-Page',
             template: 'src/index.hbs',
@@ -72,3 +68,13 @@ module.exports = {
 
     ]
 }
+
+module.exports = () => {
+    if (isProduction) {
+        config.mode = 'production';
+        config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), new CleanWebpackPlugin()); 
+    } else {
+        config.mode = 'development';
+    }
+    return config;
+};
