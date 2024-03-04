@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -12,9 +13,8 @@ const pkgVars = require('./package.json');
 const {entry, sourceDir, buildDir, port} = pkgVars.config;
 
 const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 const outputBundleHandler = isProduction ? buildDir : sourceDir;
-
+const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 const config = {
     entry: `./${sourceDir}/scripts/index.js`,
@@ -35,7 +35,7 @@ const config = {
             },
             { 
                 test: /\.s[ac]ss$/i, 
-                use: [ stylesHandler , 'css-loader', 'sass-loader'] 
+                use: [ stylesHandler, 'css-loader', 'sass-loader'] 
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -61,14 +61,20 @@ const config = {
             template: `./${sourceDir}/index.hbs`,
             description: 'Some Description'
         })
-
-    ]
+    ],
+    optimization: {
+        minimizer: [
+          // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+          //   `...`,
+        ],
+      }
 }
 
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
         config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), new CleanWebpackPlugin()); 
+        config.optimization.minimizer.push(new CssMinimizerPlugin())
     } else {
         config.mode = 'development';
         config.devServer = {
