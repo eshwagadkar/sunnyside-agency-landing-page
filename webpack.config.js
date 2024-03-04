@@ -2,20 +2,20 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const fse = require("fs-extra");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const fse = require("fs-extra")
 
-const isProduction = process.env.NODE_ENV == 'production';
+const isProduction = process.env.NODE_ENV == 'production'
 
 // Access the fields to configure webpack
-const pkgVars = require('./package.json');
+const pkgVars = require('./package.json')
 
 // Destructure variables from pkgVars.config
-const {entry, sourceDir, buildDir, port} = pkgVars.config;
+const {entry, sourceDir, buildDir, port} = pkgVars.config
 
-const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
-const outputBundleHandler = isProduction ? buildDir : sourceDir;
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js'
+const outputBundleHandler = isProduction ? buildDir : sourceDir
+const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader'
 
 class RunAfterCompile{
     apply(compiler) {
@@ -24,7 +24,7 @@ class RunAfterCompile{
         })
     }
 }
-// SHARED CONFIF
+// SHARED CONFIG
 const config = {
     entry: `./${sourceDir}/scripts/index.js`,
     output: {
@@ -80,7 +80,8 @@ const config = {
 }
 
 module.exports = () => {
-    if (isProduction) { // PRODUCTION CONFIG
+    // PRODUCTION CONFIG
+    if (isProduction) { 
         config.mode = 'production';
         config.plugins.push(
             new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), 
@@ -88,7 +89,8 @@ module.exports = () => {
             new RunAfterCompile()
         ); 
         config.optimization.minimizer.push(new CssMinimizerPlugin())
-    } else {  // DEVELOPMENT CONFIG
+    // DEVELOPMENT CONFIG
+    } else {  
         config.mode = 'development';
         config.devServer = {
             static: `./${sourceDir}/` ,
@@ -101,5 +103,5 @@ module.exports = () => {
             host: '0.0.0.0'
         }
     }
-    return config;
-};
+    return config
+}
