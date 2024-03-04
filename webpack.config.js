@@ -5,30 +5,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV == 'production';
 
-const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
-
 // Access the fields to configure webpack
 const pkgVars = require('./package.json');
 
 // Destructure variables from pkgVars.config
 const {entry, sourceDir, buildDir, port} = pkgVars.config;
 
+const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.js';
+const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+const outputBundleHandler = isProduction ? buildDir : sourceDir;
+
+
 const config = {
     entry: `./${sourceDir}/scripts/index.js`,
     output: {
         filename: browserCacheHandler,
-        path: path.resolve(__dirname, buildDir),
-    },
-    devServer: {
-        static: './dist' ,
-        watchFiles: [`./${sourceDir}/index.hbs`],
-        hot: true,
-        port,
-        open: true,
-        compress: true,
-        historyApiFallback: true,
-        host: '0.0.0.0'
+        path: path.resolve(__dirname, outputBundleHandler),
     },
     module: {
         rules: [
@@ -79,6 +71,16 @@ module.exports = () => {
         config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), new CleanWebpackPlugin()); 
     } else {
         config.mode = 'development';
+        config.devServer = {
+            static: `./${sourceDir}/` ,
+            watchFiles: [`./${sourceDir}/index.hbs`],
+            hot: true,
+            port,
+            open: true,
+            compress: true,
+            historyApiFallback: true,
+            host: '0.0.0.0'
+        }
     }
     return config;
 };
