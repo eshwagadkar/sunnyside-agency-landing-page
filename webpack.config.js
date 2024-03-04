@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const fse = require("fs-extra");
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -16,6 +17,14 @@ const browserCacheHandler = isProduction ? 'bundle.[contenthash].js' : 'bundle.j
 const outputBundleHandler = isProduction ? buildDir : sourceDir;
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
+class RunAfterCompile{
+    apply(compiler) {
+        compiler.hooks.done.tap('Copy images', () => {
+            fse.copySync(`./${sourceDir}/images`, `./${buildDir}/images`)
+        })
+    }
+}
+// SHARED CONFIF
 const config = {
     entry: `./${sourceDir}/scripts/index.js`,
     output: {
@@ -71,11 +80,15 @@ const config = {
 }
 
 module.exports = () => {
-    if (isProduction) {
+    if (isProduction) { // PRODUCTION CONFIG
         config.mode = 'production';
-        config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), new CleanWebpackPlugin()); 
+        config.plugins.push(
+            new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }), 
+            new CleanWebpackPlugin(),
+            new RunAfterCompile()
+        ); 
         config.optimization.minimizer.push(new CssMinimizerPlugin())
-    } else {
+    } else {  // DEVELOPMENT CONFIG
         config.mode = 'development';
         config.devServer = {
             static: `./${sourceDir}/` ,
