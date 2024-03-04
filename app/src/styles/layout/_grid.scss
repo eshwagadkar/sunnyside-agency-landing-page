@@ -1,0 +1,5 @@
+.main-grid-layout{
+    display: grid;
+    grid-template-rows: repeat(5, minmax(min-content, max-content));
+    grid-template-columns: [full-start] repeat(2, minmax(min-content, max-content)) [full-end];
+}
