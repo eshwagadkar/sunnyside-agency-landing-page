@@ -26,7 +26,7 @@ class RunAfterCompile{
 }
 // SHARED CONFIG
 const config = {
-    entry: `./${sourceDir}/scripts/index.js`,
+    entry: `./${sourceDir}/index.js`,
     output: {
         filename: browserCacheHandler,
         path: path.resolve(__dirname, outputBundleHandler),
@@ -97,8 +97,8 @@ module.exports = () => {
     } else {  
         config.mode = 'development';
         config.devServer = {
-            static: `./${sourceDir}/` ,
-            watchFiles: [`./${sourceDir}/index.hbs`],
+            static: `./${buildDir}/` ,
+            // watchFiles: [`./${sourceDir}/index.hbs`],  // This is not needed as we write markup using JSX CODE. 
             hot: true,
             port,
             open: true,
