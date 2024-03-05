@@ -18,5 +18,7 @@ root.render(
    </React.StrictMode>
  );
 
-
+// Warning: You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. 
+// Instead, call root.render() on the existing root instead if you want to update it.
+// Solution to the warning :  Comment the below LOC
 // if(module.hot) { module.hot.accept() }
