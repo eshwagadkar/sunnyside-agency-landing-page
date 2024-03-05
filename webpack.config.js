@@ -26,7 +26,7 @@ class RunAfterCompile{
 }
 // SHARED CONFIG
 const config = {
-    entry: `./${sourceDir}/scripts/index.js`,
+    entry: `./${sourceDir}/index.js`,
     output: {
         filename: browserCacheHandler,
         path: path.resolve(__dirname, outputBundleHandler),
