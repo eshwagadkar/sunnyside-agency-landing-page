@@ -98,7 +98,7 @@ module.exports = () => {
         config.mode = 'development';
         config.devServer = {
             static: `./${buildDir}/` ,
-            // watchFiles: [`./${sourceDir}/index.hbs`],
+            // watchFiles: [`./${sourceDir}/index.hbs`],  // This is not needed as we write markup using JSX CODE. 
             hot: true,
             port,
             open: true,
